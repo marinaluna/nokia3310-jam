@@ -19,6 +19,7 @@ int main(int argc, char* argv[]) {
         sdl_destroy();
         return -1;
     }
+    gfx_init();
 
     while(1) {
         

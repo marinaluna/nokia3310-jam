@@ -1,4 +1,5 @@
 #include "sdl_context.h"
+#include "gfx.h"
 
 #include <stdio.h>
 
@@ -62,6 +63,49 @@ int sdl_poll_events() {
 
     while(SDL_PollEvent(&sdl_ctx.event)) {
         switch(sdl_ctx.event.type) {
+
+            case SDL_KEYDOWN: {
+                switch(sdl_ctx.event.key.keysym.sym) {
+                    case SDLK_w:
+                        topViewport.y += 1;
+                        break;
+                    case SDLK_s:
+                        topViewport.y -= 1;
+                        if(topViewport.y < 0) {
+                            topViewport.y = 0;
+                        }
+                        break;
+                    case SDLK_d:
+                        topViewport.x += 1;
+                        break;
+                    case SDLK_a:
+                        topViewport.x -= 1;
+                        if(topViewport.x < 0) {
+                            topViewport.x = 0;
+                        }
+                        break;
+                    
+                    case SDLK_UP:
+                        bottomViewport.y += 1;
+                        break;
+                    case SDLK_DOWN:
+                        bottomViewport.y -= 1;
+                        if(bottomViewport.y < 0) {
+                            bottomViewport.y = 0;
+                        }
+                        break;
+                    case SDLK_RIGHT:
+                        bottomViewport.x += 1;
+                        break;
+                    case SDLK_LEFT:
+                        bottomViewport.x -= 1;
+                        if(bottomViewport.x < 0) {
+                            bottomViewport.x = 0;
+                        }
+                        break;
+                }
+                break;
+            }
 
             case SDL_QUIT:
                 return -1;
